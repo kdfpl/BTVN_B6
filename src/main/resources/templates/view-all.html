@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Chu</title>
+</head>
+<body>
+<section>
+    <form>
+        <label for="tenSearch"></label>
+        <input type="text" id="tenSearch" name="tenSearch"/><br/>
+        <button type="submit">Search</button>
+    </form>
+</section>
+<section>
+    <form th:action="@{/san-pham/add}" th:object="${sp}" method="post">
+        <label for="idSanPham">ID</label>
+        <input type="text" id="idSanPham" th:value="${sp.idSanPham}"/><br/>
+
+        <label for="maSanPham">Ma</label>
+        <input type="text" id="maSanPham" th:value="${sp.maSanPham}"/><br/>
+
+        <label for="tenSanPham">Ten</label>
+        <input type="text" id="tenSanPham" th:value="${sp.tenSanPham}"/><br/>
+
+        <label for="loaiSanPham">Loai</label>
+        <select id="loaiSanPham" th:value="${sp.loaiSanPham}">
+            <option th:each="lsp : ${listLoaiSP}" th:value="${lsp.loaiSanPham}" th:text="${lsp.loaiSanPham}" th:selected="${lsp.loaiSanPham == sp.loaiSanPham}"></option>
+        </select>
+        <br/>
+
+        <label for="giaSanPham">Gia</label>
+        <input type="text" id="giaSanPham" th:value="${sp.giaSanPham}"/><br/>
+
+        <button type="submit">Add</button>
+    </form>
+</section>
+<section>
+    <table border="1">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Ma</td>
+            <td>Ten</td>
+            <td>Loai</td>
+            <td>Gia</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sp : ${listSP}">
+            <td th:text="${sp.idSanPham}"></td>
+            <td th:text="${sp.maSanPham}"></td>
+            <td th:text="${sp.tenSanPham}"></td>
+            <td th:text="${sp.loaiSanPham}"></td>
+            <td th:text="${sp.giaSanPham}"></td>
+            <td>
+                <a th:href="@{/san-pham/detail/{id}(id=${sp.idSanPham})}">Detail</a>
+                <a th:href="@{/san-pham/edit/{id}(id=${sp.idSanPham})}">Edit</a>
+                <a th:href="@{/san-pham/remove/{id}(id=${sp.idSanPham})}">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
