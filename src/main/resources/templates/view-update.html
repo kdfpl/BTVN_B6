@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <form th:action="@{/san-pham/update/{id}(id=${sp.idSanPham})}" th:object="${sp}" method="post">
+        <label for="idSanPham">ID</label>
+        <input type="text" id="idSanPham" th:field="*{idSanPham}"/><br/>
+        <div th:errors="*{idSanPham}"></div><br/>
+
+        <label for="maSanPham">Ma</label>
+        <input type="text" id="maSanPham" th:field="*{maSanPham}"/><br/>
+        <div th:errors="*{maSanPham}"></div><br/>
+
+        <label for="tenSanPham">Ten</label>
+        <input type="text" id="tenSanPham" th:field="*{tenSanPham}"/><br/>
+        <div th:errors="*{tenSanPham}"></div><br/>
+
+        <label for="loaiSanPham">Loai</label>
+        <select id="loaiSanPham" th:field="*{loaiSanPham}">
+            <option th:each="lsp : ${listLoaiSP}" th:value="${lsp.loaiSanPham}" th:text="${lsp.loaiSanPham}" th:selected="${lsp.loaiSanPham == sp.loaiSanPham}"></option>
+        </select>
+        <br/>
+
+        <label for="giaSanPham">Gia</label>
+        <input type="text" id="giaSanPham" th:field="*{giaSanPham}"/><br/>
+        <div th:errors="*{giaSanPham}"></div><br/>
+
+        <button type="submit">Update</button>
+    </form>
+</section>
+</body>
+</html>

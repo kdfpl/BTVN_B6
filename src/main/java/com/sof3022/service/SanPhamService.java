@@ -54,4 +54,10 @@ public class SanPhamService {
     public void addSanPham(SanPham sanPham) {
         sanPhamList.add(sanPham);
     }
+
+    public List<SanPham> searchSanPham(String tenSanPham) {
+        return sanPhamList.stream()
+                .filter(sanPham -> sanPham.getTenSanPham().toLowerCase().contains(tenSanPham.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 }
